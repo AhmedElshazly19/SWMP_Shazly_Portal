@@ -1,0 +1,2566 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SWMP | Strategic Warehouse & Medical Products - Enterprise Customer Portal</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Pro / CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ==========================================================================
+           CSS RESET & DESIGN SYSTEM VARIABLES (SAP Fiori / Modern Enterprise Theme)
+           ========================================================================== */
+        :root {
+            --primary: #0a2540;          /* Deep Enterprise Navy */
+            --primary-light: #1e3a8a;
+            --secondary: #0070f3;        /* Medical Blue */
+            --secondary-dark: #0051a2;
+            --accent: #00c7b7;           /* Fiori / Healthcare Teal */
+            --accent-glow: rgba(0, 199, 183, 0.2);
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 24px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Utility Classes */
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem auto;
+        }
+
+        .section-header span {
+            display: inline-block;
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--secondary);
+            margin-bottom: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            background: rgba(0, 112, 243, 0.08);
+            border-radius: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section-header p {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 0.875rem 1.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary);
+            color: #ffffff;
+            box-shadow: 0 4px 14px rgba(0, 112, 243, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 112, 243, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: #ffffff;
+            color: var(--primary);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-secondary:hover {
+            background-color: #f1f5f9;
+            border-color: var(--text-muted);
+            transform: translateY(-2px);
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .btn-accent:hover {
+            background-color: #00b0a2;
+            transform: translateY(-2px);
+        }
+
+        /* ==========================================================================
+           ANNOUNCEMENT BANNER
+           ========================================================================== */
+        .announcement-banner {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: #ffffff;
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .announcement-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 0 auto;
+        }
+
+        .announcement-badge {
+            background: var(--accent);
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .announcement-close {
+            background: none;
+            border: none;
+            color: #ffffff;
+            cursor: pointer;
+            font-size: 1rem;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .announcement-close:hover {
+            opacity: 1;
+        }
+
+        /* ==========================================================================
+           STICKY NAVIGATION
+           ========================================================================== */
+        header.sticky-header {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 1.25rem;
+            font-weight: 800;
+            box-shadow: 0 4px 10px rgba(0, 112, 243, 0.3);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.01em;
+            line-height: 1.1;
+        }
+
+        .logo-subtitle {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .lang-switcher {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: #f1f5f9;
+            padding: 0.35rem 0.75rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .search-trigger {
+            background: none;
+            border: none;
+            font-size: 1.1rem;
+            color: var(--primary);
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .search-trigger:hover {
+            color: var(--secondary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* ==========================================================================
+           HERO SECTION WITH AUTO SLIDER
+           ========================================================================== */
+        .hero {
+            position: relative;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background: var(--primary);
+            color: #ffffff;
+            padding: 4rem 0;
+        }
+
+        .hero-slider-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .hero-slide.active {
+            opacity: 0.35;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10, 37, 64, 0.95) 0%, rgba(10, 37, 64, 0.8) 100%);
+            z-index: 2;
+        }
+
+        .hero-container {
+            position: relative;
+            z-index: 3;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #cbd5e1;
+            margin-bottom: 2.5rem;
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 4rem;
+        }
+
+        /* Animated Statistics Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 0.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.2rem;
+        }
+
+        .stat-number span {
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ==========================================================================
+           ABOUT SWMP SECTION
+           ========================================================================== */
+        .about-section {
+            background: #ffffff;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-content h2 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .about-content p {
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+            font-size: 1.05rem;
+        }
+
+        .about-features-list {
+            list-style: none;
+            margin: 2rem 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .about-features-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.95rem;
+        }
+
+        .about-features-list i {
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        .about-visual {
+            position: relative;
+        }
+
+        .about-card-stack {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            color: #ffffff;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-card-stack::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(0, 199, 183, 0.15);
+            border-radius: 50%;
+            filter: blur(40px);
+        }
+
+        .about-card-stack h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .about-card-stack p {
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+        }
+
+        .upa-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.75rem 1.25rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-weight: 600;
+        }
+
+        /* ==========================================================================
+           WHY CHOOSE SWMP & PARTNERS / CERTIFICATIONS
+           ========================================================================== */
+        .why-section {
+            background: var(--bg-body);
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .why-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 2.5rem;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .why-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--secondary);
+        }
+
+        .why-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 112, 243, 0.08);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .why-card:hover .why-icon {
+            background: var(--secondary);
+            color: #ffffff;
+        }
+
+        .why-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .why-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Certifications & Compliance */
+        .cert-section {
+            background: #ffffff;
+            padding: 4rem 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .cert-slider {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .cert-badge-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #f8fafc;
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .cert-badge-item i {
+            color: var(--secondary);
+            font-size: 1.5rem;
+        }
+
+        /* ==========================================================================
+           STORAGE SERVICES & TEMPERATURE GUIDE
+           ========================================================================== */
+        .services-section {
+            background: var(--bg-body);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .service-header-bg {
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 2.5rem;
+            position: relative;
+        }
+
+        .service-body {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-body h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .service-body p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-meta {
+            margin-top: auto;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+            font-size: 0.85rem;
+            color: var(--primary);
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* ==========================================================================
+           WAREHOUSE CAPABILITIES & PORTAL CAPABILITIES
+           ========================================================================== */
+        .capabilities-section {
+            background: #ffffff;
+        }
+
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .cap-item {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 1.5rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .cap-item:hover {
+            background: #ffffff;
+            border-color: var(--secondary);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+        }
+
+        .cap-item i {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .cap-item h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .cap-item p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Portal Features Grid */
+        .portal-features-section {
+            background: var(--bg-body);
+        }
+
+        .portal-feat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .portal-feat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .portal-feat-card:hover {
+            border-color: var(--secondary);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+        }
+
+        .portal-feat-card i {
+            font-size: 1.75rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .portal-feat-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .portal-feat-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================================================
+           HOW TO BECOME A CUSTOMER & WORKFLOW GUIDE
+           ========================================================================== */
+        .onboarding-section {
+            background: #ffffff;
+        }
+
+        .timeline-steps {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1rem;
+            position: relative;
+            margin-top: 3rem;
+        }
+
+        .timeline-steps::before {
+            content: '';
+            position: absolute;
+            top: 35px;
+            left: 5%;
+            right: 5%;
+            height: 3px;
+            background: var(--border-color);
+            z-index: 1;
+        }
+
+        .step-box {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            background: #ffffff;
+            padding: 1rem;
+        }
+
+        .step-number {
+            width: 70px;
+            height: 70px;
+            background: var(--primary);
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin: 0 auto 1.25rem auto;
+            border: 4px solid #ffffff;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+
+        .step-box:hover .step-number {
+            background: var(--secondary);
+            transform: scale(1.1);
+        }
+
+        .step-box h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-box p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Portal Workflow Guide (How to Use the Portal) */
+        .workflow-section {
+            background: var(--bg-body);
+        }
+
+        .workflow-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .workflow-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .workflow-card:hover {
+            border-color: var(--secondary);
+            box-shadow: var(--shadow-md);
+            transform: translateX(5px);
+        }
+
+        .workflow-num {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--secondary);
+            min-width: 50px;
+        }
+
+        .workflow-details h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .workflow-details p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================================================
+           DASHBOARD PREVIEW & GALLERY
+           ========================================================================== */
+        .dashboard-preview-section {
+            background: var(--primary);
+            color: #ffffff;
+        }
+
+        .dashboard-mockup {
+            background: #0f172a;
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .dashboard-header-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .dashboard-grid-mockup {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .mockup-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+        }
+
+        .mockup-card h4 {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .mockup-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        /* Warehouse Gallery */
+        .gallery-section {
+            background: #ffffff;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            height: 250px;
+            box-shadow: var(--shadow-sm);
+            background: #e2e8f0;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(10, 37, 64, 0.9), transparent);
+            padding: 1.5rem 1rem 1rem 1rem;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        /* ==========================================================================
+           DOWNLOADS & FAQ
+           ========================================================================== */
+        .downloads-section {
+            background: var(--bg-body);
+        }
+
+        .downloads-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .download-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .download-card:hover {
+            border-color: var(--secondary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .download-info h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .download-info span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .download-btn {
+            background: rgba(0, 112, 243, 0.08);
+            color: var(--secondary);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .download-btn:hover {
+            background: var(--secondary);
+            color: #ffffff;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: #ffffff;
+        }
+
+        .faq-accordion {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .faq-item {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .faq-question {
+            padding: 1.25rem 1.5rem;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .faq-question i {
+            transition: var(--transition);
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding-bottom: 1.25rem;
+        }
+
+        /* ==========================================================================
+           SUPPORT CENTER & CONTACT
+           ========================================================================== */
+        .support-section {
+            background: var(--bg-body);
+        }
+
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .support-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .support-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-5px);
+            border-color: var(--secondary);
+        }
+
+        .support-card i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1.25rem;
+        }
+
+        .support-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .support-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: #ffffff;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            padding: 0.875rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 0.95rem;
+            background: #f8fafc;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.1);
+        }
+
+        .map-container {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            height: 100%;
+            min-height: 400px;
+            background: #e2e8f0;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* ==========================================================================
+           FOOTER
+           ========================================================================== */
+        footer {
+            background: var(--primary);
+            color: #ffffff;
+            padding: 5rem 0 2rem 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-col h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+        }
+
+        .footer-col p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: #ffffff;
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        /* ==========================================================================
+           MODALS, SEARCH OVERLAY & QUICK ACTION FLOATING BUTTONS
+           ========================================================================== */
+        /* Login Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 37, 64, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 450px;
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 1.25rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            color: var(--primary);
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .modal-header h3 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-header p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Search Overlay */
+        .search-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 37, 64, 0.92);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 10vh;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        .search-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .search-box-wrapper {
+            width: 100%;
+            max-width: 700px;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .search-input-field {
+            width: 100%;
+            padding: 1.25rem 1.5rem 1.25rem 3.5rem;
+            font-size: 1.25rem;
+            background: #ffffff;
+            border: none;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            font-family: inherit;
+            color: var(--primary);
+        }
+
+        .search-box-wrapper i {
+            position: absolute;
+            top: 50%;
+            left: 3.5rem;
+            transform: translateY(-50%);
+            font-size: 1.25rem;
+            color: var(--text-muted);
+        }
+
+        .search-results-container {
+            width: 100%;
+            max-width: 700px;
+            margin-top: 1.5rem;
+            padding: 0 2rem;
+            max-height: 50vh;
+            overflow-y: auto;
+        }
+
+        .search-result-item {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-sm);
+            color: #ffffff;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-result-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--secondary);
+        }
+
+        /* Floating Quick Actions */
+        .quick-actions {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            z-index: 999;
+        }
+
+        .qa-btn {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-md);
+            cursor: pointer;
+            border: none;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .qa-btn:hover {
+            background: var(--secondary);
+            transform: scale(1.1);
+        }
+
+        .qa-btn.chat-btn {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .qa-btn.chat-btn:hover {
+            background: #00b0a2;
+        }
+
+        /* ==========================================================================
+           RESPONSIVE DESIGN MEDIA QUERIES
+           ========================================================================== */
+        @media (max-width: 1024px) {
+            .nav-links {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+            .stats-grid, .why-grid, .services-grid, .portal-feat-grid, .downloads-grid, .support-grid, .gallery-grid, .capabilities-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .about-grid, .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .timeline-steps {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .timeline-steps::before {
+                display: none;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .stats-grid, .why-grid, .services-grid, .portal-feat-grid, .downloads-grid, .support-grid, .gallery-grid, .capabilities-grid, .about-features-list {
+                grid-template-columns: 1fr;
+            }
+            .timeline-steps {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ANNOUNCEMENT BANNER -->
+    <div class="announcement-banner" id="announcementBanner">
+        <div class="announcement-content">
+            <span class="announcement-badge">Notice</span>
+            <span>SAP S/4HANA Portal Maintenance & Integration Upgrade scheduled for this Friday 02:00 AM - 05:00 AM UTC.</span>
+        </div>
+        <button class="announcement-close" onclick="closeAnnouncement()"><i class="fas fa-times"></i></button>
+    </div>
+
+    <!-- STICKY NAVIGATION -->
+    <header class="sticky-header">
+        <div class="container nav-container">
+            <a href="#" class="logo-area">
+                <div class="logo-icon">S</div>
+                <div class="logo-text">
+                    <span class="logo-title">SWMP</span>
+                    <span class="logo-subtitle">Strategic Logistics & UPA Affiliated</span>
+                </div>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#about">About SWMP</a></li>
+                <li><a href="#why">Why SWMP</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#capabilities">Capabilities</a></li>
+                <li><a href="#onboarding">Customer Journey</a></li>
+                <li><a href="#workflow">Portal Guide</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#support">Support</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="lang-switcher" onclick="toggleLanguage()">
+                    <i class="fas fa-globe"></i> <span id="langText">AR</span>
+                </button>
+                <button class="search-trigger" onclick="openSearch()" aria-label="Search">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="btn btn-primary" onclick="openLoginModal()" style="padding: 0.5rem 1.25rem; font-size: 0.9rem;">
+                    Login
+                </button>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION WITH AUTO SLIDER -->
+    <section class="hero">
+        <div class="hero-slider-bg">
+            <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=1600&auto=format&fit=crop')"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1578496779774-724e526487e4?q=80&w=1600&auto=format&fit=crop')"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1616401784845-180882ba9ba8?q=80&w=1600&auto=format&fit=crop')"></div>
+        </div>
+        <div class="hero-overlay"></div>
+
+        <div class="container hero-container">
+            <div class="hero-badge">
+                <i class="fas fa-shield-alt"></i> Official National Pharmaceutical Logistics Platform
+            </div>
+            <h1>Secure Pharmaceutical Warehousing & <span>SAP-Powered</span> Digital Portal</h1>
+            <p>Affiliated with the Egyptian Unified Procurement Authority (UPA). Delivering world-class receiving, inspection, cold-chain storage, and distribution services for manufacturers, hospitals, and global healthcare suppliers.</p>
+            
+            <div class="hero-buttons">
+                <a href="#onboarding" class="btn btn-primary">Become a Customer <i class="fas fa-arrow-right"></i></a>
+                <a href="#portal-features" class="btn btn-secondary">Explore Portal Features</a>
+                <a href="#contact" class="btn btn-secondary" style="background: rgba(255,255,255,0.1); color: #fff; border-color: rgba(255,255,255,0.2);">Contact Us</a>
+            </div>
+
+            <!-- Animated Statistics Grid -->
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number"><span class="counter" data-target="1450">0</span>+</div>
+                    <div class="stat-label">Registered Customers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number"><span class="counter" data-target="24">0</span></div>
+                    <div class="stat-label">Smart Warehouses</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number"><span class="counter" data-target="500">0</span>K</div>
+                    <div class="stat-label">Pallet Positions</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number"><span class="counter" data-target="99.9">0</span>%</div>
+                    <div class="stat-label">Inventory Accuracy</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ANNOUNCEMENT TICKER OR SECTION -->
+    <div class="cert-section">
+        <div class="container">
+            <div class="cert-slider">
+                <div class="cert-badge-item"><i class="fas fa-award"></i> GDP Certified</div>
+                <div class="cert-badge-item"><i class="fas fa-certificate"></i> GMP Compliant</div>
+                <div class="cert-badge-item"><i class="fas fa-check-circle"></i> ISO 9001:2015</div>
+                <div class="cert-badge-item"><i class="fas fa-shield-virus"></i> ISO 13485 (Medical Devices)</div>
+                <div class="cert-badge-item"><i class="fas fa-lock"></i> ISO 27001 Security</div>
+                <div class="cert-badge-item"><i class="fas fa-hospital"></i> Egyptian Drug Authority</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABOUT SWMP SECTION -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content">
+                    <span>About SWMP</span>
+                    <h2>National Excellence in Medical Logistics & Storage</h2>
+                    <p>Strategic Warehouse & Medical Products (SWMP) is the premier national pharmaceutical logistics organization affiliated with the Unified Procurement Authority (UPA). We operate state-of-the-art facilities designed specifically for receiving, inspecting, storing, and managing medicines, vaccines, and medical devices.</p>
+                    <p>Through our seamless SAP S/4HANA integration, we provide end-to-end digital visibility, regulatory compliance, and unmatched operational speed for pharmaceutical manufacturers, importers, hospitals, and global healthcare distributors.</p>
+                    
+                    <ul class="about-features-list">
+                        <li><i class="fas fa-check-circle"></i> Fully GDP/GMP Certified</li>
+                        <li><i class="fas fa-check-circle"></i> Real-time SAP Integration</li>
+                        <li><i class="fas fa-check-circle"></i> Advanced Cold Chain Control</li>
+                        <li><i class="fas fa-check-circle"></i> 24/7 Monitored Security</li>
+                    </ul>
+
+                    <a href="https://upa.gov.eg" target="_blank" class="btn btn-secondary">Learn More about UPA <i class="fas fa-external-link-alt"></i></a>
+                </div>
+
+                <div class="about-visual">
+                    <div class="about-card-stack">
+                        <h3>Our Core Mission & Vision</h3>
+                        <p>To safeguard public health by establishing an impenetrable, highly efficient, and fully digitized national medical supply chain infrastructure that adheres to the strictest international pharmaceutical standards.</p>
+                        <div class="upa-badge">
+                            <i class="fas fa-landmark fa-lg"></i>
+                            <div>
+                                <div style="font-size: 0.8rem; opacity: 0.8;">Affiliated Organization</div>
+                                <div style="font-size: 1.05rem;">Unified Procurement Authority (UPA)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE SWMP -->
+    <section class="why-section" id="why">
+        <div class="container">
+            <div class="section-header">
+                <span>Advantages</span>
+                <h2>Why Choose SWMP as Your Logistics Partner</h2>
+                <p>We combine government backing with cutting-edge enterprise automation to deliver unparalleled warehousing reliability.</p>
+            </div>
+
+            <div class="why-grid">
+                <div class="why-card">
+                    <div class="why-icon"><i class="fas fa-landmark"></i></div>
+                    <h3>Government-Backed</h3>
+                    <p>Directly affiliated with the UPA, ensuring maximum security, regulatory alignment, and institutional stability.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon"><i class="fas fa-server"></i></div>
+                    <h3>SAP S/4HANA Integrated</h3>
+                    <p>Direct electronic data interchange and real-time synchronization with enterprise resource planning systems.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon"><i class="fas fa-snowflake"></i></div>
+                    <h3>Advanced Cold Chain</h3>
+                    <p>Validated 2–8°C cold rooms and ultra-low freezer storage with redundant power and real-time IoT monitoring.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Strict Compliance</h3>
+                    <p>Full adherence to Good Distribution Practice (GDP) and Good Manufacturing Practice (GMP) guidelines.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon"><i class="fas fa-barcode"></i></div>
+                    <h3>Barcode & RFID Tracking</h3>
+                    <p>End-to-end serialized item tracking ensuring absolute traceability from receiving dock to hospital delivery.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon"><i class="fas fa-clock"></i></div>
+                    <h3>24/7 Operations & Security</h3>
+                    <p>Round-the-clock receiving, automated fire suppression, biometric access control, and live CCTV surveillance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STORAGE SERVICES -->
+    <section class="services-section" id="services">
+        <div class="container">
+            <div class="section-header">
+                <span>Storage Portfolio</span>
+                <h2>Comprehensive Temperature & Special Storage Services</h2>
+                <p>Tailored storage environments designed to protect the integrity of every pharmaceutical category.</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-header-bg">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <div class="service-body">
+                        <h3>General Storage (15–25°C)</h3>
+                        <p>Optimized ambient warehouse space for tablets, capsules, medical equipment, and non-sensitive consumables.</p>
+                        <div class="service-meta">
+                            <span>Climate Controlled</span>
+                            <span>High Capacity</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-header-bg" style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);">
+                        <i class="fas fa-snowflake"></i>
+                    </div>
+                    <div class="service-body">
+                        <h3>Cold Storage (2–8°C)</h3>
+                        <p>Specialized cold rooms equipped with continuous multi-point thermal mapping and instant emergency alarms for vaccines and biologics.</p>
+                        <div class="service-meta">
+                            <span>Strict Thermal Range</span>
+                            <span>Redundant Cooling</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-header-bg" style="background: linear-gradient(135deg, #0369a1 0%, #0f172a 100%);">
+                        <i class="fas fa-icicles"></i>
+                    </div>
+                    <div class="service-body">
+                        <h3>Frozen Storage (-20°C to -80°C)</h3>
+                        <p>Ultra-low temperature freezers designed for advanced cell therapies, plasma products, and specialized biochemical compounds.</p>
+                        <div class="service-meta">
+                            <span>Deep Freeze</span>
+                            <span>Liquid Nitrogen Backup</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-header-bg" style="background: linear-gradient(135deg, #991b1b 0%, #7f1d1d 100%);">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div class="service-body">
+                        <h3>Controlled Drugs & Narcotics</h3>
+                        <p>High-security vaults featuring double-key authentication, motion sensors, 24/7 armed guarding, and strict EDA compliance.</p>
+                        <div class="service-meta">
+                            <span>Maximum Security</span>
+                            <span>Restricted Access</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-header-bg" style="background: linear-gradient(135deg, #0f766e 0%, #115e59 100%);">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <div class="service-body">
+                        <h3>Mezzanine Storage</h3>
+                        <p>High-density multi-level shelving systems ideal for fast-picking medical devices, surgical kits, and pharmaceutical accessories.</p>
+                        <div class="service-meta">
+                            <span>Optimized Vertical Space</span>
+                            <span>Rapid Pick & Pack</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-header-bg" style="background: linear-gradient(135deg, #4338ca 0%, #3730a3 100%);">
+                        <i class="fas fa-hospital-symbol"></i>
+                    </div>
+                    <div class="service-body">
+                        <h3>Quarantine & Inspection Area</h3>
+                        <p>Dedicated secure bays for incoming shipment quarantine, sampling, physical inspection, and quality assurance release processing.</p>
+                        <div class="service-meta">
+                            <span>EDA Compliant</span>
+                            <span>Rigorous QA</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WAREHOUSE CAPABILITIES -->
+    <section class="capabilities-section" id="capabilities">
+        <div class="container">
+            <div class="section-header">
+                <span>Infrastructure</span>
+                <h2>Advanced Warehouse Capabilities & Safety Systems</h2>
+                <p>Equipped with state-of-the-art automation and safety infrastructure to guarantee operational excellence.</p>
+            </div>
+
+            <div class="capabilities-grid">
+                <div class="cap-item">
+                    <i class="fas fa-network-wired"></i>
+                    <h4>SAP Warehouse Management</h4>
+                    <p>Automated task allocation and stock optimization.</p>
+                </div>
+                <div class="cap-item">
+                    <i class="fas fa-temperature-high"></i>
+                    <h4>24/7 Temp Monitoring</h4>
+                    <p>Real-time wireless sensors across all zones.</p>
+                </div>
+                <div class="cap-item">
+                    <i class="fas fa-fire-extinguisher"></i>
+                    <h4>Advanced Fire Suppression</h4>
+                    <p>Inert gas clean-agent systems protecting stock.</p>
+                </div>
+                <div class="cap-item">
+                    <i class="fas fa-fingerprint"></i>
+                    <h4>Biometric Access Control</h4>
+                    <p>Multi-factor authentication for secure zones.</p>
+                </div>
+                <div class="cap-item">
+                    <i class="fas fa-video"></i>
+                    <h4>HD CCTV Surveillance</h4>
+                    <p>Complete optical coverage with 90-day archive.</p>
+                </div>
+                <div class="cap-item">
+                    <i class="fas fa-bolt"></i>
+                    <h4>Uninterruptible Power (UPS)</h4>
+                    <p>Instant diesel generator backup for cold rooms.</p>
+                </div>
+                <div class="cap-item">
+                    <i class="fas fa-robot"></i>
+                    <h4>Automated Guided Vehicles</h4>
+                    <p>Precision robotic pallet transport internally.</p>
+                </div>
+                <div class="cap-item">
+                    <i class="fas fa-truck-loading"></i>
+                    <h4>Dock Levelers & Seals</h4>
+                    <p>Weather-sealed loading bays for safe transfer.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTAL CAPABILITIES & FEATURES -->
+    <section class="portal-features-section" id="portal-features">
+        <div class="container">
+            <div class="section-header">
+                <span>Digital Portal</span>
+                <h2>Enterprise Customer Portal Features</h2>
+                <p>Manage your entire supply chain lifecycle through our intuitive, SAP-integrated web portal.</p>
+            </div>
+
+            <div class="portal-feat-grid">
+                <div class="portal-feat-card">
+                    <i class="fas fa-file-invoice"></i>
+                    <h3>Storage Requests</h3>
+                    <p>Easily submit and schedule new storage allocations and inbound shipments online.</p>
+                </div>
+                <div class="portal-feat-card">
+                    <i class="fas fa-search-location"></i>
+                    <h3>Real-Time Shipment Tracking</h3>
+                    <p>Monitor your trucks and inbound delivery status live from dispatch to dock.</p>
+                </div>
+                <div class="portal-feat-card">
+                    <i class="fas fa-boxes"></i>
+                    <h3>Live Inventory Visibility</h3>
+                    <p>View exact batch numbers, expiry dates, quantities, and storage locations instantly.</p>
+                </div>
+                <div class="portal-feat-card">
+                    <i class="fas fa-file-alt"></i>
+                    <h3>Warehouse Receipts & Reports</h3>
+                    <p>Download official inspection certificates, Goods Receipt Notes, and custom analytics.</p>
+                </div>
+                <div class="portal-feat-card">
+                    <i class="fas fa-file-export"></i>
+                    <h3>Excel & PDF Export</h3>
+                    <p>Export comprehensive stock statements and audit logs with a single click.</p>
+                </div>
+                <div class="portal-feat-card">
+                    <i class="fas fa-exchange-alt"></i>
+                    <h3>Product Release Requests</h3>
+                    <p>Initiate outbound dispatch and hospital delivery orders seamlessly through the portal.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW TO BECOME A CUSTOMER (ONBOARDING) -->
+    <section class="onboarding-section" id="onboarding">
+        <div class="container">
+            <div class="section-header">
+                <span>Onboarding Journey</span>
+                <h2>How to Become an SWMP Customer</h2>
+                <p>A transparent, structured 6-step pathway to onboard your pharmaceutical organization into our digital ecosystem.</p>
+            </div>
+
+            <div class="timeline-steps">
+                <div class="step-box">
+                    <div class="step-number">01</div>
+                    <h4>Contact SWMP</h4>
+                    <p>Reach out via our portal inquiry form or call our onboarding specialists.</p>
+                </div>
+                <div class="step-box">
+                    <div class="step-number">02</div>
+                    <h4>Facility Visit</h4>
+                    <p>Tour our state-of-the-art warehouses and review service level agreements.</p>
+                </div>
+                <div class="step-box">
+                    <div class="step-number">03</div>
+                    <h4>Sign Contract</h4>
+                    <p>Finalize and sign your initial digital storage and logistics agreement.</p>
+                </div>
+                <div class="step-box">
+                    <div class="step-number">04</div>
+                    <h4>Get Credentials</h4>
+                    <p>Receive your secure enterprise username and temporary portal password.</p>
+                </div>
+                <div class="step-box">
+                    <div class="step-number">05</div>
+                    <h4>First Login</h4>
+                    <p>Access the portal, complete security verification, and set up your team.</p>
+                </div>
+                <div class="step-box">
+                    <div class="step-number">06</div>
+                    <h4>Start Operating</h4>
+                    <p>Submit storage requests, track inventory, and manage medical supplies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW TO USE THE PORTAL (WORKFLOW GUIDE) -->
+    <section class="workflow-section" id="workflow">
+        <div class="container">
+            <div class="section-header">
+                <span>Step-by-Step Guide</span>
+                <h2>How to Use the SWMP Customer Portal</h2>
+                <p>Follow this complete operational workflow from initial login to inventory management.</p>
+            </div>
+
+            <div class="workflow-container">
+                <div class="workflow-card">
+                    <div class="workflow-num">01</div>
+                    <div class="workflow-details">
+                        <h3>Secure Portal Login</h3>
+                        <p>Log in with your corporate credentials and multi-factor authentication token.</p>
+                    </div>
+                </div>
+                <div class="workflow-card">
+                    <div class="workflow-num">02</div>
+                    <div class="workflow-details">
+                        <h3>Create Storage Request</h3>
+                        <p>Select 'New Request' and specify your product category (General, Cold, Frozen, or Narcotics).</p>
+                    </div>
+                </div>
+                <div class="workflow-card">
+                    <div class="workflow-num">03</div>
+                    <div class="workflow-details">
+                        <h3>Enter Product Specifications</h3>
+                        <p>Input item names, medical device specs, quantities, batch numbers, expiry dates, and delivery dates.</p>
+                    </div>
+                </div>
+                <div class="workflow-card">
+                    <div class="workflow-num">04</div>
+                    <div class="workflow-details">
+                        <h3>SWMP Review & Approval</h3>
+                        <p>Our logistics team reviews the submission and approves dock allocation instantly via SAP.</p>
+                    </div>
+                </div>
+                <div class="workflow-card">
+                    <div class="workflow-num">05</div>
+                    <div class="workflow-details">
+                        <h3>Delivery & Receiving Inspection</h3>
+                        <p>Deliver products to SWMP docks for professional quality inspection and barcoding.</p>
+                    </div>
+                </div>
+                <div class="workflow-card">
+                    <div class="workflow-num">06</div>
+                    <div class="workflow-details">
+                        <h3>Live Inventory & Release</h3>
+                        <p>Track your stock in real-time and request product release or hospital distribution anytime.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DASHBOARD PREVIEW -->
+    <section class="dashboard-preview-section">
+        <div class="container">
+            <div class="section-header" style="color: #ffffff;">
+                <span style="color: var(--accent); background: rgba(0, 199, 183, 0.1);">Preview</span>
+                <h2 style="color: #ffffff;">Enterprise Portal Dashboard Mockup</h2>
+                <p style="color: #94a3b8;">A glimpse into the clean, data-rich interface awaiting your logistics team.</p>
+            </div>
+
+            <div class="dashboard-mockup">
+                <div class="dashboard-header-bar">
+                    <div>
+                        <div style="font-size: 0.85rem; color: #94a3b8;">Welcome back,</div>
+                        <div style="font-size: 1.25rem; font-weight: 700;">Global Pharma Corp (SAP ID: #98420)</div>
+                    </div>
+                    <div style="background: rgba(0, 199, 183, 0.15); color: var(--accent); padding: 0.4rem 1rem; border-radius: 50px; font-weight: 600; font-size: 0.85rem;">
+                        <i class="fas fa-circle" style="font-size: 0.5rem;"></i> SAP Connected Live
+                    </div>
+                </div>
+
+                <div class="dashboard-grid-mockup">
+                    <div class="mockup-card">
+                        <h4>Active Pallets Stored</h4>
+                        <div class="mockup-value">1,480</div>
+                        <div style="font-size: 0.8rem; color: #34d399; margin-top: 0.5rem;"><i class="fas fa-arrow-up"></i> +12% this month</div>
+                    </div>
+                    <div class="mockup-card">
+                        <h4>Pending Inbound Requests</h4>
+                        <div class="mockup-value">6</div>
+                        <div style="font-size: 0.8rem; color: #f59e0b; margin-top: 0.5rem;"><i class="fas fa-clock"></i> 2 scheduled for today</div>
+                    </div>
+                    <div class="mockup-card">
+                        <h4>Storage Utilization</h4>
+                        <div class="mockup-value">84%</div>
+                        <div style="font-size: 0.8rem; color: #60a5fa; margin-top: 0.5rem;"><i class="fas fa-check-circle"></i> Optimal Capacity</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WAREHOUSE GALLERY -->
+    <section class="gallery-section">
+        <div class="container">
+            <div class="section-header">
+                <span>Facility Showcase</span>
+                <h2>Inside SWMP Warehouses</h2>
+                <p>Take a visual tour of our advanced, temperature-controlled, and automated medical storage facilities.</p>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=800&auto=format&fit=crop" alt="Automated Warehouse">
+                    <div class="gallery-overlay">Automated High-Bay Storage</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1578496779774-724e526487e4?q=80&w=800&auto=format&fit=crop" alt="Cold Room Facility">
+                    <div class="gallery-overlay">Validated Cold Rooms (2-8°C)</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1616401784845-180882ba9ba8?q=80&w=800&auto=format&fit=crop" alt="Inspection Area">
+                    <div class="gallery-overlay">Quality Inspection Bays</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=800&auto=format&fit=crop" alt="Loading Dock">
+                    <div class="gallery-overlay">Sealed Loading Docks</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DOWNLOADS CENTER -->
+    <section class="downloads-section">
+        <div class="container">
+            <div class="section-header">
+                <span>Resources</span>
+                <h2>Downloads Center</h2>
+                <p>Access official portal user guides, compliance documentation, and storage agreements.</p>
+            </div>
+
+            <div class="downloads-grid">
+                <div class="download-card">
+                    <div class="download-info">
+                        <h4>Portal User Manual</h4>
+                        <span>PDF • 4.2 MB</span>
+                    </div>
+                    <a href="#" class="download-btn" onclick="alert('Downloading Portal User Manual...')"><i class="fas fa-download"></i></a>
+                </div>
+                <div class="download-card">
+                    <div class="download-info">
+                        <h4>Storage Agreement Form</h4>
+                        <span>PDF • 1.8 MB</span>
+                    </div>
+                    <a href="#" class="download-btn" onclick="alert('Downloading Storage Agreement Form...')"><i class="fas fa-download"></i></a>
+                </div>
+                <div class="download-card">
+                    <div class="download-info">
+                        <h4>Required Compliance Documents</h4>
+                        <span>ZIP • 12.5 MB</span>
+                    </div>
+                    <a href="#" class="download-btn" onclick="alert('Downloading Compliance Checklist...')"><i class="fas fa-download"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <span>Support & Info</span>
+                <h2>Frequently Asked Questions</h2>
+                <p>Find immediate answers regarding onboarding, portal usage, and warehousing procedures.</p>
+            </div>
+
+            <div class="faq-accordion">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>How do I become a registered customer?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        You can begin by submitting our contact form or reaching out directly. Our onboarding team will schedule a facility walkthrough, review your commercial documents, and assist with initial contract signing.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>How do I receive portal login credentials?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Once your storage agreement is finalized and verified, your designated corporate administrator will receive secure temporary login credentials via encrypted email.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>How do I submit a new storage request?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Log into the Customer Portal, navigate to 'Storage Requests', click 'New Request', choose your required temperature category, fill in product batch details, and submit for instant SAP processing.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>Can I track my inventory in real-time?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes. The portal provides live inventory visibility displaying active stock levels, batch numbers, expiry dates, and exact warehouse location mapping.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>How do I request product release for hospital delivery?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Simply go to 'Release Requests' in the portal, select the items and quantities you wish to dispatch, specify the destination, and submit the order for fulfillment.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SUPPORT CENTER & CONTACT -->
+    <section class="support-section" id="support">
+        <div class="container">
+            <div class="section-header">
+                <span>Help Desk</span>
+                <h2>Support Center</h2>
+                <p>Our dedicated support team is available around the clock to assist you.</p>
+            </div>
+
+            <div class="support-grid">
+                <div class="support-card">
+                    <i class="fas fa-robot"></i>
+                    <h3>AI Assistant (Demo)</h3>
+                    <p>Get instant answers regarding storage guidelines, forms, and portal steps.</p>
+                    <button class="btn btn-secondary" onclick="alert('AI Assistant online. How can I help you today?')">Launch Chatbot</button>
+                </div>
+                <div class="support-card">
+                    <i class="fas fa-headset"></i>
+                    <h3>Live Support Ticket</h3>
+                    <p>Create a priority support ticket for technical or operational assistance.</p>
+                    <button class="btn btn-secondary" onclick="alert('Support ticket system open.')">Open Ticket</button>
+                </div>
+                <div class="support-card">
+                    <i class="fas fa-phone-alt"></i>
+                    <h3>Emergency Contact</h3>
+                    <p>Direct hotline for cold chain or urgent shipment emergencies.</p>
+                    <a href="tel:+20212345678" class="btn btn-primary">+20 (2) 1234-5678</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT FORM & MAP -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <span>Get in Touch</span>
+                <h2>Contact SWMP Onboarding Team</h2>
+                <p>Send us your inquiry and our logistics specialists will get back to you promptly.</p>
+            </div>
+
+            <div class="contact-grid">
+                <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you! Your message has been sent successfully.');">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" placeholder="Dr. Ahmed Mohamed" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Company / Organization</label>
+                        <input type="text" placeholder="Pharma Solutions Egypt" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Corporate Email</label>
+                        <input type="email" placeholder="ahmed@pharmasolutions.eg" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" placeholder="+20 100 000 0000" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Message / Inquiry</label>
+                        <textarea rows="4" placeholder="Please provide details about your storage requirements..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Inquiry</button>
+                </form>
+
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3454.123456789!2d31.423456!3d30.044456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDAyJzQwLjAiTiAzMcKwMjUnMjQuMCJF!5e0!3m2!1sen!2seg!4v1650000000000!5m2!1sen!2seg" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="logo-area" style="margin-bottom: 1.5rem;">
+                        <div class="logo-icon">S</div>
+                        <div class="logo-text">
+                            <span class="logo-title" style="color: #fff;">SWMP</span>
+                            <span class="logo-subtitle">Strategic Warehouse & Medical Products</span>
+                        </div>
+                    </a>
+                    <p>Affiliated with the Unified Procurement Authority (UPA). Setting the benchmark for pharmaceutical warehousing, cold chain excellence, and SAP-integrated digital logistics.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">About SWMP</a></li>
+                        <li><a href="#why">Why SWMP</a></li>
+                        <li><a href="#services">Storage Services</a></li>
+                        <li><a href="#capabilities">Warehouse Capabilities</a></li>
+                        <li><a href="#portal-features">Portal Features</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Customer Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#onboarding">Customer Journey</a></li>
+                        <li><a href="#workflow">Portal Guide</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#support">Support Center</a></li>
+                        <li><a href="https://upa.gov.eg" target="_blank">UPA Website</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal & Security</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Security & Compliance</a></li>
+                        <li><a href="#">Accessibility Statement</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div>&copy; 2026 SWMP (Strategic Warehouse & Medical Products). Affiliated with UPA. All rights reserved.</div>
+                <div>Enterprise Portal v4.2.0 • SAP S/4HANA Connected</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LOGIN MODAL -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal-card">
+            <button class="modal-close" onclick="closeLoginModal()"><i class="fas fa-times"></i></button>
+            <div class="modal-header">
+                <h3>Customer Portal Login</h3>
+                <p>Enter your enterprise credentials to access SAP S/4HANA operations.</p>
+            </div>
+            <form onsubmit="event.preventDefault(); alert('Authenticating with SAP S/4HANA...'); closeLoginModal();" style="display: flex; flex-direction: column; gap: 1.25rem;">
+                <div class="form-group">
+                    <label>Username / SAP ID</label>
+                    <input type="text" placeholder="e.g. USER98420" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="••••••••••••" required>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.85rem;">
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                        <input type="checkbox"> Remember Me
+                    </label>
+                    <a href="#" style="color: var(--secondary); text-decoration: none;">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Secure Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- SEARCH OVERLAY -->
+    <div class="search-overlay" id="searchOverlay">
+        <button class="modal-close" onclick="closeSearch()" style="color: #fff;"><i class="fas fa-times"></i></button>
+        <div class="search-box-wrapper">
+            <i class="fas fa-search"></i>
+            <input type="text" class="search-input-field" id="searchInput" placeholder="Search services, FAQ, portal features..." oninput="handleSearch(this.value)">
+        </div>
+        <div class="search-results-container" id="searchResults">
+            <!-- Dynamic search results populated via JS -->
+        </div>
+    </div>
+
+    <!-- QUICK ACTION FLOATING BUTTONS -->
+    <div class="quick-actions">
+        <button class="qa-btn" onclick="openLoginModal()" title="Login"><i class="fas fa-sign-in-alt"></i></button>
+        <button class="qa-btn chat-btn" onclick="alert('Live chat connecting to an SWMP specialist...')" title="Live Chat"><i class="fas fa-comment-dots"></i></button>
+        <a href="#support" class="qa-btn" title="Support"><i class="fas fa-headset"></i></a>
+        <a href="#contact" class="qa-btn" title="Email Us"><i class="fas fa-envelope"></i></a>
+        <a href="tel:+20212345678" class="qa-btn" title="Call Us"><i class="fas fa-phone"></i></a>
+        <button class="qa-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Back to Top"><i class="fas fa-arrow-up"></i></button>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        /* ==========================================================================
+           HERO AUTO SLIDER
+           ========================================================================== */
+        const slides = document.querySelectorAll('.hero-slide');
+        let currentSlide = 0;
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        setInterval(nextSlide, 5000);
+
+        /* ==========================================================================
+           ANNOUNCEMENT BANNER
+           ========================================================================== */
+        function closeAnnouncement() {
+            document.getElementById('announcementBanner').style.display = 'none';
+        }
+
+        /* ==========================================================================
+           MODAL CONTROLS
+           ========================================================================== */
+        function openLoginModal() {
+            document.getElementById('loginModal').classList.add('active');
+        }
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.remove('active');
+        }
+
+        function openSearch() {
+            document.getElementById('searchOverlay').classList.add('active');
+            document.getElementById('searchInput').focus();
+        }
+        function closeSearch() {
+            document.getElementById('searchOverlay').classList.remove('active');
+        }
+
+        // Close modals on ESC key
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeLoginModal();
+                closeSearch();
+            }
+        });
+
+        /* ==========================================================================
+           FAQ ACCORDION
+           ========================================================================== */
+        function toggleFaq(element) {
+            const item = element.parentElement;
+            const isActive = item.classList.contains('active');
+            
+            // Close all
+            document.querySelectorAll('.faq-item').forEach(fi => fi.classList.remove('active'));
+            
+            // Open clicked if not already open
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        }
+
+        /* ==========================================================================
+           LANGUAGE SWITCHER DEMO
+           ========================================================================== */
+        function toggleLanguage() {
+            const langText = document.getElementById('langText');
+            if (langText.textContent === 'AR') {
+                langText.textContent = 'EN';
+                document.documentElement.setAttribute('dir', 'rtl');
+                alert('تم التبديل إلى اللغة العربية (Demo mode)');
+            } else {
+                langText.textContent = 'AR';
+                document.documentElement.setAttribute('dir', 'ltr');
+                alert('Switched to English');
+            }
+        }
+
+        /* ==========================================================================
+           SEARCH FUNCTIONALITY
+           ========================================================================== */
+        const searchableItems = [
+            { title: "General Storage (15–25°C)", category: "Services", link: "#services" },
+            { title: "Cold Storage (2–8°C)", category: "Services", link: "#services" },
+            { title: "Frozen Storage (-20°C to -80°C)", category: "Services", link: "#services" },
+            { title: "Controlled Drugs & Narcotics Storage", category: "Services", link: "#services" },
+            { title: "SAP S/4HANA Integration", category: "Capabilities", link: "#capabilities" },
+            { title: "How to become a customer", category: "FAQ", link: "#onboarding" },
+            { title: "How to submit a storage request", category: "Portal Guide", link: "#workflow" },
+            { title: "Real-Time Inventory Visibility", category: "Portal Features", link: "#portal-features" },
+            { title: "Warehouse Receipts & Reports", category: "Portal Features", link: "#portal-features" },
+            { title: "Download Portal User Manual", category: "Downloads", link: "#downloads" }
+        ];
+
+        function handleSearch(query) {
+            const resultsContainer = document.getElementById('searchResults');
+            resultsContainer.innerHTML = '';
+            
+            if (!query.trim()) return;
+
+            const filtered = searchableItems.filter(item => 
+                item.title.toLowerCase().includes(query.toLowerCase()) || 
+                item.category.toLowerCase().includes(query.toLowerCase())
+            );
+
+            if (filtered.length === 0) {
+                resultsContainer.innerHTML = '<div class="search-result-item">No matching results found.</div>';
+                return;
+            }
+
+            filtered.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'search-result-item';
+                div.innerHTML = `<strong>[${item.category}]</strong> ${item.title}`;
+                div.onclick = () => {
+                    closeSearch();
+                    window.location.hash = item.link;
+                };
+                resultsContainer.appendChild(div);
+            });
+        }
+
+        /* ==========================================================================
+           STATISTICS COUNTER ANIMATION ON SCROLL
+           ========================================================================== */
+        const counters = document.querySelectorAll('.counter');
+        let animated = false;
+
+        function runCounters() {
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                let count = 0;
+                const speed = target / 50;
+                
+                const updateCount = () => {
+                    count += speed;
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count);
+                        setTimeout(updateCount, 30);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        }
+
+        window.addEventListener('scroll', () => {
+            const statsSection = document.querySelector('.stats-grid');
+            if (statsSection) {
+                const position = statsSection.getBoundingClientRect().top;
+                const screenHeight = window.innerHeight;
+                if (position < screenHeight && !animated) {
+                    runCounters();
+                    animated = true;
+                }
+            }
+        });
+
+        /* ==========================================================================
+           MOBILE MENU TOGGLE
+           ========================================================================== */
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.display = 'none';
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '80px';
+                navLinks.style.left = '0';
+                navLinks.style.width = '100%';
+                navLinks.style.background = '#ffffff';
+                navLinks.style.padding = '2rem';
+                navLinks.style.boxShadow = '0 10px 15px rgba(0,0,0,0.1)';
+            }
+        }
+    </script>
+</body>
+</html>
+
